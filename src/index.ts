@@ -1,7 +1,7 @@
+import { ContatoJsonController } from "./controller/ContatoJsonController";
+import { ContatoCsvController } from "./controller/ContatoCsvController";
 
-import { ContaBancaria } from './model/entity/ContaBancaria'
-
-const conta1 = new ContaBancaria()
-console.log(conta1)
+const contatoController = new ContatoCsvController()
+console.log(contatoController.recuperarContatos())
 
 
