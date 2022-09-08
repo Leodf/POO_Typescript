@@ -1,19 +1,14 @@
-import { readFileSync } from 'fs';
-import { join } from 'path'
 import { Contato } from '../model/Contato'
-import { IContatoController } from './IContatoController';
+import { ContatoController } from './ContatoController';
 
-export class ContatoJsonController implements IContatoController {
+export class ContatoJsonController extends ContatoController {
     
-    private _caminhoArquivo: string
-
     constructor(){
-        this._caminhoArquivo = join(__dirname, '../', 'data', 'contatos.json')
+        super('contatos.json')
     }
 
     recuperarContatos(): Contato[] {
-        const conteudoStr = readFileSync(this._caminhoArquivo, 'utf-8')
-        const listaObj: any[] = JSON.parse(conteudoStr)
+        const listaObj: any[] = JSON.parse(this._conteudoStr)
         const contatos = listaObj.map(obj => new Contato(
             obj.nome,
             obj.telefone,

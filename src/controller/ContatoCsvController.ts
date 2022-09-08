@@ -1,20 +1,15 @@
-import { readFileSync } from 'fs';
-import { join } from 'path'
 import { parse } from 'csv-parse/lib/sync'
 import { Contato } from '../model/Contato'
-import { IContatoController } from './IContatoController';
+import { ContatoController } from './ContatoController';
 
-export class ContatoCsvController implements IContatoController {
+export class ContatoCsvController extends ContatoController {
     
-    private _caminhoArquivo: string
-
     constructor(){
-        this._caminhoArquivo = join(__dirname, '../', 'data', 'contatos.csv')
+        super('contatos.csv')
     }
     
     recuperarContatos(): Contato[] {
-        const conteudoStr = readFileSync(this._caminhoArquivo, 'utf-8')
-        const listaObj: any[] = parse(conteudoStr)
+        const listaObj: any[] = parse(this._conteudoStr)
         const contatos = listaObj.map(obj => new Contato(
             obj[0],
             obj[1],
